@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 11:57:31 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/09 11:44:31 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/01/09 13:59:28 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	swap(t_list **stack)
 {
 	t_list	*tmp;
 
+	if (!stack || !(*stack))
+		return ;
 	tmp = (*stack)->next;
 	(*stack)->next = tmp->next;
 	ft_lstadd_front(stack, tmp);
@@ -74,17 +76,25 @@ void	swap(t_list **stack)
 
 void	push(t_list **stack_give, t_list **stack_receive)
 {
+	t_list	*tmp;
+
+	if (!stack_give || !(*stack_give))
+		return ;
+	tmp = (*stack_give)->next;
 	ft_lstadd_front(stack_receive, *stack_give);
-	*stack_give = (*stack_give)->next;
+	*stack_give = tmp;
 }
 
 void	rotate(t_list **stack)
 {
 	t_list	*tmp;
 
+	if (!stack || !(*stack))
+		return ;
 	tmp = *stack;
-	*stack = tmp->next;
 	ft_lstadd_back(stack, tmp);
+	*stack = tmp->next;
+	tmp->next = NULL;
 }
 
 void	reverse_rotate(t_list **stack)
@@ -92,8 +102,12 @@ void	reverse_rotate(t_list **stack)
 	t_list	*tmp;
 	int		size;
 
+	if (!stack || !(*stack))
+		return ;
 	size = ft_lstsize(*stack);
-	tmp = remove_index(stack, (size - 1));
-	tmp->next = (*stack)->next;
+	tmp = remove_index(stack, size - 1);
+	if (tmp == NULL)
+		return ;
+	tmp->next = *stack;
 	*stack = tmp;
 }

@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 10:09:25 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/09 11:44:45 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/01/09 15:04:47 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ t_list	*remove_index(t_list **lst, int index)
 	t_list	*tmp2;
 	int		i;
 
-	if (!lst || ft_lstsize(*lst) > index)
+	if (!lst || ft_lstsize(*lst) <= index)
 		return (NULL);
 	tmp = *lst;
 	i = 0;
-	while (tmp->next != NULL)
+	while (tmp != NULL)
 	{
 		if ((i + 1) == index)
 		{
@@ -45,4 +45,28 @@ t_list	*remove_index(t_list **lst, int index)
 		i++;
 	}
 	return (NULL);
+}
+
+int	get_min_index(t_list *stack)
+{
+	t_list	*tmp;
+	int 	min;
+	int		i;
+	int		index;
+
+	i = 0;
+	index = 0;
+	tmp = stack;
+	min = ft_atoi(tmp->content);
+	while (tmp != NULL)
+	{
+		if (ft_atoi(tmp->content) < min)
+		{
+			min = ft_atoi(tmp->content);
+			index = i;
+		}
+		tmp = tmp->next;
+		i++;
+	}
+	return (index);
 }
