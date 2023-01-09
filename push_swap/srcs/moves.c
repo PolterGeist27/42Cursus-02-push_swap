@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 11:57:31 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/05 13:14:02 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/01/09 11:44:31 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ Linked list functions in libft:
 */
 
 /*
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}	t_list;
+	typedef struct s_list
+	{
+		void			*content;
+		struct s_list	*next;
+	}	t_list;
 */
 
 /*
@@ -80,10 +80,20 @@ void	push(t_list **stack_give, t_list **stack_receive)
 
 void	rotate(t_list **stack)
 {
-	
+	t_list	*tmp;
+
+	tmp = *stack;
+	*stack = tmp->next;
+	ft_lstadd_back(stack, tmp);
 }
 
-void	reverse(t_list **stack)
+void	reverse_rotate(t_list **stack)
 {
-	
+	t_list	*tmp;
+	int		size;
+
+	size = ft_lstsize(*stack);
+	tmp = remove_index(stack, (size - 1));
+	tmp->next = (*stack)->next;
+	*stack = tmp;
 }
