@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 14:20:12 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/09 15:28:40 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/01/09 16:12:29 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_lstprint(t_list **lst)
 	t_list	*tmp;
 
 	if(*lst == NULL) {
-		ft_printf("Empty list\n");
+		ft_printf("Empty list");
 		return ;
 	}
 	tmp = *lst;
@@ -59,7 +59,7 @@ void	apply_func(t_list **a_stack, t_list **b_stack, char *str)
 		ft_printf("There is no such commmand. Try Again\n");
 }
 
-int	sort(t_list **a_stack, t_list **b_stack)
+int	sort(t_list **a_stack, t_list **b_stack, int *count)
 {
 	int		min_index;
 	int		size;
@@ -78,7 +78,9 @@ int	sort(t_list **a_stack, t_list **b_stack)
 			reverse_rotate(a_stack);
 		else
 			rotate(a_stack);
+		(*count)++;
 	}
+	(*count)++;
 	push(a_stack, b_stack);
 	return (0);
 }
@@ -91,7 +93,7 @@ int	main(int argc, char **argv)
 	int		j;
 	//char	str[10];
 
-	if (argc <= 1)
+	if (argc <= 3)
 		ft_printf("Error! Input an array to sort!\n");
 	i = 1;
 	a_stack = NULL;
@@ -101,20 +103,44 @@ int	main(int argc, char **argv)
 		ft_lstadd_back(&a_stack, ft_lstnew(argv[i]));
 		i++;
 	}
+	j = 0;
+	ft_printf("----------------\n");
 	ft_printf("Stack A: ");
 	ft_lstprint(&a_stack);
 	ft_printf("\nStack B: ");
 	ft_lstprint(&b_stack);
+	ft_printf("\nMoves: %d\n", j);
 	ft_printf("----------------\n");
-	j = 0;
 	while(ft_lstsize(a_stack) != 2)
 	{
-		sort(&a_stack, &b_stack);
+		sort(&a_stack, &b_stack, &j);
 		ft_printf("Stack A: ");
 		ft_lstprint(&a_stack);
 		ft_printf("\nStack B: ");
 		ft_lstprint(&b_stack);
-		ft_printf("\n");
+		ft_printf("\nMoves: %d\n", j);
+		ft_printf("----------------\n");
+	}
+	if ((a_stack)->content > ((a_stack)->next)->content)
+	{
+		swap(&a_stack);
+		j++;
+		ft_printf("Stack A: ");
+		ft_lstprint(&a_stack);
+		ft_printf("\nStack B: ");
+		ft_lstprint(&b_stack);
+		ft_printf("\nMoves: %d\n", j);
+		ft_printf("----------------\n");
+	}
+	while (ft_lstsize(b_stack) != 0)
+	{
+		push(&b_stack, &a_stack);
+		j++;
+		ft_printf("Stack A: ");
+		ft_lstprint(&a_stack);
+		ft_printf("\nStack B: ");
+		ft_lstprint(&b_stack);
+		ft_printf("\nMoves: %d\n", j);
 		ft_printf("----------------\n");
 	}
 	/*while (1)
