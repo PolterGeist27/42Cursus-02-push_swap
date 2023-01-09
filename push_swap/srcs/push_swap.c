@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 14:20:12 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/09 16:12:29 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/01/09 16:56:35 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,20 +68,27 @@ int	sort(t_list **a_stack, t_list **b_stack, int *count)
 	min_index = get_min_index(*a_stack);
 	size = ft_lstsize(*a_stack);
 	command = ft_calloc(4, sizeof(char));
-	if (min_index > (size / 2))
+	if (min_index >= (size / 2))
 		command = "ra";
 	else
 		command = "rra";
 	while (get_min_index(*a_stack) != 0)
 	{
 		if (!ft_strncmp(command, "rra", 3))
+		{
 			reverse_rotate(a_stack);
+			ft_printf("RRA\n");
+		}
 		else
+		{
+			ft_printf("ra\n");
 			rotate(a_stack);
+		}
 		(*count)++;
 	}
-	(*count)++;
 	push(a_stack, b_stack);
+	ft_printf("push\n");
+	(*count)++;
 	return (0);
 }
 
@@ -112,37 +119,26 @@ int	main(int argc, char **argv)
 	ft_printf("\nMoves: %d\n", j);
 	ft_printf("----------------\n");
 	while(ft_lstsize(a_stack) != 2)
-	{
 		sort(&a_stack, &b_stack, &j);
-		ft_printf("Stack A: ");
-		ft_lstprint(&a_stack);
-		ft_printf("\nStack B: ");
-		ft_lstprint(&b_stack);
-		ft_printf("\nMoves: %d\n", j);
-		ft_printf("----------------\n");
-	}
-	if ((a_stack)->content > ((a_stack)->next)->content)
+	if (ft_atoi((a_stack)->content) > ft_atoi(((a_stack)->next)->content))
 	{
 		swap(&a_stack);
+		ft_printf("swap\n");
 		j++;
-		ft_printf("Stack A: ");
-		ft_lstprint(&a_stack);
-		ft_printf("\nStack B: ");
-		ft_lstprint(&b_stack);
-		ft_printf("\nMoves: %d\n", j);
-		ft_printf("----------------\n");
 	}
 	while (ft_lstsize(b_stack) != 0)
 	{
 		push(&b_stack, &a_stack);
+		ft_printf("push\n");
 		j++;
-		ft_printf("Stack A: ");
-		ft_lstprint(&a_stack);
-		ft_printf("\nStack B: ");
-		ft_lstprint(&b_stack);
-		ft_printf("\nMoves: %d\n", j);
-		ft_printf("----------------\n");
 	}
+	ft_printf("----------------\n");
+	ft_printf("Stack A: ");
+	ft_lstprint(&a_stack);
+	ft_printf("\nStack B: ");
+	ft_lstprint(&b_stack);
+	ft_printf("\nMoves: %d\n", j);
+	ft_printf("----------------\n");
 	/*while (1)
 	{
 		sort(&a_stack, &b_stack);
