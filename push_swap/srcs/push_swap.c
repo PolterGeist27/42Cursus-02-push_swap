@@ -6,20 +6,11 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 14:20:12 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/09 16:56:35 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/01/17 15:14:07 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
-
-/*
-TODO:
-	- Sorting algorithm
-	- Test move functions
-	-...
-*/
-
-#include <stdio.h>
 
 void	ft_lstprint(t_list **lst)
 {
@@ -37,59 +28,81 @@ void	ft_lstprint(t_list **lst)
 	ft_printf("%s ",tmp->content);
 }
 
-void	apply_func(t_list **a_stack, t_list **b_stack, char *str)
+void	ft_sort_average(t_list **stack_give, t_list **stack_receive, char c, int size)
 {
-	if (!ft_strncmp(str, "sa", 3))
-		swap(a_stack);
-	else if (!ft_strncmp(str, "sb", 3))
-		swap(b_stack);
-	else if (!ft_strncmp(str, "ra", 3))
-		rotate(a_stack);
-	else if (!ft_strncmp(str, "rb", 3))
-		rotate(b_stack);
-	else if (!ft_strncmp(str, "rra", 3))
-		reverse_rotate(a_stack);
-	else if (!ft_strncmp(str, "rrb", 3))
-		reverse_rotate(b_stack);
-	else if (!ft_strncmp(str, "pa", 3))
-		push(b_stack, a_stack);
-	else if (!ft_strncmp(str, "pb", 3))
-		push(a_stack, b_stack);
-	else
-		ft_printf("There is no such commmand. Try Again\n");
+	int	average;
+	int	i;
+
+	average = get_average(*stack_give);
+	i = 0;
+	while (i < ft_lstsize(*stack_give))
+	{
+		if (ft_atoi((*stack_give)->content) < average && c == 'b' && ft_lstsize(*stack_give) > size)
+			push(stack_give, stack_receive, c);
+		else if (ft_atoi((*stack_give)->content) >= average && c == 'a')
+			push(stack_give, stack_receive, c);
+		else if (ft_lstsize(*stack_give) != 3)
+		{
+			if (c == 'a')
+				rotate(stack_give, 'b');
+			else if (c == 'b' && ft_lstsize(*stack_give) > size)
+				rotate(stack_give, 'a');
+		}
+		i++;
+	}
 }
 
-int	sort(t_list **a_stack, t_list **b_stack, int *count)
+void	ft_sort_stack(t_list **stack, char c)
 {
-	int		min_index;
-	int		size;
-	char	*command;
-
-	min_index = get_min_index(*a_stack);
-	size = ft_lstsize(*a_stack);
-	command = ft_calloc(4, sizeof(char));
-	if (min_index >= (size / 2))
-		command = "ra";
-	else
-		command = "rra";
-	while (get_min_index(*a_stack) != 0)
+	ft_printf("----------------\n");
+	ft_printf("Stack A: ");
+	ft_lstprint(stack);
+	ft_printf("\n----------------\n");
+	while ((*stack) != NULL && !ft_is_sorted(*stack, c))
 	{
-		if (!ft_strncmp(command, "rra", 3))
+		if (c == 'a')
 		{
-			reverse_rotate(a_stack);
-			ft_printf("RRA\n");
+			if (ft_atoi(((*stack)->next)->content) > ft_atoi((((*stack)->next)->next)->content))
+			{
+				rotate(stack, c);
+				swap(stack, c);
+				if (!ft_is_sorted(*stack, c))
+					reverse_rotate(stack, c);
+			}
+			if (ft_atoi((*stack)->content) > ft_atoi(((*stack)->next)->content))
+				swap(stack, c);
 		}
-		else
+		if (c == 'b')
 		{
-			ft_printf("ra\n");
-			rotate(a_stack);
+			if (ft_atoi(((*stack)->next)->content) < ft_atoi((((*stack)->next)->next)->content))
+			{
+				rotate(stack, c);
+				swap(stack, c);
+				if (!ft_is_sorted(*stack, c))
+					reverse_rotate(stack, c);
+			}
+			if (ft_atoi((*stack)->content) < ft_atoi(((*stack)->next)->content))
+				swap(stack, c);
 		}
-		(*count)++;
 	}
-	push(a_stack, b_stack);
-	ft_printf("push\n");
-	(*count)++;
-	return (0);
+}
+
+
+void	ft_sort(t_list **a_stack, t_list **b_stack)
+{
+	int current_size;
+
+	current_size = 3;
+	while (!ft_is_sorted(*a_stack, 'a') || *b_stack != NULL)
+	{
+		while (ft_lstsize(*a_stack) != current_size)
+			ft_sort_average(a_stack, b_stack, 'b', current_size);
+		ft_sort_stack(a_stack, 'a');
+		while ((*b_stack) != NULL)
+			ft_sort_average(b_stack, a_stack, 'a', current_size);
+		ft_sort_stack(b_stack, 'b');
+		current_size += 3;
+	}
 }
 
 int	main(int argc, char **argv)
@@ -97,8 +110,6 @@ int	main(int argc, char **argv)
 	t_list	*a_stack;
 	t_list	*b_stack;
 	int		i;
-	int		j;
-	//char	str[10];
 
 	if (argc <= 3)
 		ft_printf("Error! Input an array to sort!\n");
@@ -110,46 +121,11 @@ int	main(int argc, char **argv)
 		ft_lstadd_back(&a_stack, ft_lstnew(argv[i]));
 		i++;
 	}
-	j = 0;
+	ft_sort(&a_stack, &b_stack);
 	ft_printf("----------------\n");
 	ft_printf("Stack A: ");
 	ft_lstprint(&a_stack);
 	ft_printf("\nStack B: ");
 	ft_lstprint(&b_stack);
-	ft_printf("\nMoves: %d\n", j);
-	ft_printf("----------------\n");
-	while(ft_lstsize(a_stack) != 2)
-		sort(&a_stack, &b_stack, &j);
-	if (ft_atoi((a_stack)->content) > ft_atoi(((a_stack)->next)->content))
-	{
-		swap(&a_stack);
-		ft_printf("swap\n");
-		j++;
-	}
-	while (ft_lstsize(b_stack) != 0)
-	{
-		push(&b_stack, &a_stack);
-		ft_printf("push\n");
-		j++;
-	}
-	ft_printf("----------------\n");
-	ft_printf("Stack A: ");
-	ft_lstprint(&a_stack);
-	ft_printf("\nStack B: ");
-	ft_lstprint(&b_stack);
-	ft_printf("\nMoves: %d\n", j);
-	ft_printf("----------------\n");
-	/*while (1)
-	{
-		sort(&a_stack, &b_stack);
-		scanf("%s", str);
-		apply_func(&a_stack, &b_stack, str);
-		ft_printf("Stack A: ");
-		ft_lstprint(&a_stack);
-		ft_printf("\nStack B: ");
-		ft_lstprint(&b_stack);
-		j++;
-		ft_printf("\nNumber of moves: %d", j);
-		ft_printf("\n");
-	}*/
+	ft_printf("\n----------------\n");
 }

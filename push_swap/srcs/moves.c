@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 11:57:31 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/09 13:59:28 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/01/17 14:35:43 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ Linked list functions in libft:
 	Stack (double pointer) → Head (pointer) → Node (t_list)
 */
 
-void	swap(t_list **stack)
+void	swap(t_list **stack, char c)
 {
 	t_list	*tmp;
 
@@ -70,11 +70,15 @@ void	swap(t_list **stack)
 	tmp = (*stack)->next;
 	(*stack)->next = tmp->next;
 	ft_lstadd_front(stack, tmp);
-//	tmp->next = *stack;
-//	*stack = tmp;
+	if (c == 'a')
+		ft_printf("sa\n");
+	if (c == 'b')
+		ft_printf("sb\n");
+	if (c == '2')
+		ft_printf("ss\n");
 }
 
-void	push(t_list **stack_give, t_list **stack_receive)
+void	push(t_list **stack_give, t_list **stack_receive, char c)
 {
 	t_list	*tmp;
 
@@ -83,9 +87,13 @@ void	push(t_list **stack_give, t_list **stack_receive)
 	tmp = (*stack_give)->next;
 	ft_lstadd_front(stack_receive, *stack_give);
 	*stack_give = tmp;
+	if (c == 'a')
+		ft_printf("pa\n");
+	if (c == 'b')
+		ft_printf("pb\n");
 }
 
-void	rotate(t_list **stack)
+void	rotate(t_list **stack, char c)
 {
 	t_list	*tmp;
 
@@ -95,9 +103,15 @@ void	rotate(t_list **stack)
 	ft_lstadd_back(stack, tmp);
 	*stack = tmp->next;
 	tmp->next = NULL;
+	if (c == 'a')
+		ft_printf("ra\n");
+	if (c == 'b')
+		ft_printf("rb\n");
+	if (c == '2')
+		ft_printf("rr\n");
 }
 
-void	reverse_rotate(t_list **stack)
+void	reverse_rotate(t_list **stack, char c)
 {
 	t_list	*tmp;
 	int		size;
@@ -110,4 +124,10 @@ void	reverse_rotate(t_list **stack)
 		return ;
 	tmp->next = *stack;
 	*stack = tmp;
+	if (c == 'a')
+		ft_printf("rra\n");
+	if (c == 'b')
+		ft_printf("rrb\n");
+	if (c == '2')
+		ft_printf("rrr\n");
 }
