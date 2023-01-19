@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 10:09:25 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/19 10:45:16 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/01/19 13:24:09 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 	'index' is found and sets the 'next' attribute
 	of the previous node to NULL and returns a pointer
 	to the first node of the section removed from the list.
-*/ 
+*/
 
-a_list	*remove_index(a_list **lst, int index)
+t_alist	*remove_index(t_alist **lst, int index)
 {
-	a_list	*tmp;
-	a_list	*tmp2;
+	t_alist	*tmp;
+	t_alist	*tmp2;
 	int		i;
 
 	if (!lst || ft_alstsize(*lst) <= index)
@@ -47,10 +47,10 @@ a_list	*remove_index(a_list **lst, int index)
 	return (NULL);
 }
 
-int	get_min(a_list *stack)
+int	get_min(t_alist *stack)
 {
-	a_list	*tmp;
-	int 	min;
+	t_alist	*tmp;
+	int		min;
 	int		i;
 	int		index;
 
@@ -71,10 +71,10 @@ int	get_min(a_list *stack)
 	return (min);
 }
 
-int	get_max(a_list *stack)
+int	get_max(t_alist *stack)
 {
-	a_list	*tmp;
-	int 	max;
+	t_alist	*tmp;
+	int		max;
 	int		i;
 	int		index;
 
@@ -95,12 +95,12 @@ int	get_max(a_list *stack)
 	return (max);
 }
 
-int	get_average(a_list *stack, int size)
+int	get_average(t_alist *stack, int size)
 {
-	a_list	*tmp;
-	int 	average;
+	t_alist	*tmp;
+	int		average;
 	int		count;
-	
+
 	count = 0;
 	average = 0;
 	tmp = stack;
@@ -115,14 +115,14 @@ int	get_average(a_list *stack, int size)
 	return (average);
 }
 
-int	ft_is_sorted(a_list *stack, char c)
+int	ft_is_sorted(t_alist *stack, char c)
 {
-	a_list *tmp1;
-	a_list *tmp2;
+	t_alist	*tmp1;
+	t_alist	*tmp2;
 
 	tmp1 = stack;
 	tmp2 = stack->next;
-	while(tmp2 != NULL)
+	while (tmp2 != NULL)
 	{
 		if ((tmp1->content > tmp2->content) && c == 'a')
 			return (0);

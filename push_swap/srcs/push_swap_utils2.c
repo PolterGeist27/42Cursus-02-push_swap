@@ -6,16 +6,16 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 11:27:15 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/19 13:12:07 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/01/19 13:22:46 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-int	get_min_index(a_list *stack)
+int	get_min_index(t_alist *stack)
 {
-	a_list	*tmp;
-	int 	min;
+	t_alist	*tmp;
+	int		min;
 	int		i;
 	int		index;
 
@@ -36,10 +36,10 @@ int	get_min_index(a_list *stack)
 	return (index);
 }
 
-int	get_max_index(a_list *stack)
+int	get_max_index(t_alist *stack)
 {
-	a_list	*tmp;
-	int 	max;
+	t_alist	*tmp;
+	int		max;
 	int		i;
 	int		index;
 
@@ -60,9 +60,9 @@ int	get_max_index(a_list *stack)
 	return (index);
 }
 
-void	ft_index(a_list **stack)
+void	ft_index(t_alist **stack)
 {
-	a_list	*tmp;
+	t_alist	*tmp;
 	int		current_index;
 	int		min;
 	int		max;
@@ -85,10 +85,9 @@ void	ft_index(a_list **stack)
 		tmp = *stack;
 		min++;
 	}
-	
 }
 
-void	ft_handle_5(a_list **a_stack, a_list **b_stack)
+void	ft_handle_5(t_alist **a_stack, t_alist **b_stack)
 {
 	int	min;
 	int	max;
@@ -115,10 +114,10 @@ void	ft_handle_5(a_list **a_stack, a_list **b_stack)
 	}
 }
 
-void	ft_handle_3(a_list **stack, char c)
+void	ft_handle_3(t_alist **stack, char c)
 {
-	int min_index;
-	int max_index;
+	int	min_index;
+	int	max_index;
 
 	min_index = get_min_index(*stack);
 	max_index = get_max_index(*stack);

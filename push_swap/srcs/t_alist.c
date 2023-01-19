@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   a_list.c                                           :+:      :+:    :+:   */
+/*   t_alist.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:36:21 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/19 10:46:40 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/01/19 13:24:47 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-a_list	*ft_alstnew(void *content)
+t_alist	*ft_alstnew(void *content)
 {
-	a_list	*new;
+	t_alist	*new;
 
-	new = (a_list *)malloc(sizeof(a_list));
+	new = (t_alist *)malloc(sizeof(t_alist));
 	if (!new)
 		return (NULL);
 	new->index = -1;
@@ -25,9 +25,9 @@ a_list	*ft_alstnew(void *content)
 	return (new);
 }
 
-int	ft_alstsize(a_list *lst)
+int	ft_alstsize(t_alist *lst)
 {
-	a_list	*tmp;
+	t_alist	*tmp;
 	int		i;
 
 	if (!lst)
@@ -42,9 +42,9 @@ int	ft_alstsize(a_list *lst)
 	return (i);
 }
 
-void	ft_alstadd_back(a_list **lst, a_list *new)
+void	ft_alstadd_back(t_alist **lst, t_alist *new)
 {
-	a_list	*tmp;
+	t_alist	*tmp;
 
 	if (!lst || !new)
 		return ;
@@ -57,15 +57,15 @@ void	ft_alstadd_back(a_list **lst, a_list *new)
 	}
 }
 
-void	ft_alstadd_front(a_list **lst, a_list *new)
+void	ft_alstadd_front(t_alist **lst, t_alist *new)
 {
 	new->next = *lst;
 	*lst = new;
 }
 
-a_list	*ft_alstlast(a_list *lst)
+t_alist	*ft_alstlast(t_alist *lst)
 {
-	a_list	*tmp;
+	t_alist	*tmp;
 
 	if (!lst)
 		return (NULL);

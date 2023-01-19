@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 14:20:12 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/19 12:47:34 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/01/19 13:25:29 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ Possible ways to sort the stacks:
 		-...
 */
 
-void	ft_binary_radix(int shift, a_list **a_stack, a_list **b_stack)
+void	ft_binary_radix(int shift, t_alist **a_stack, t_alist **b_stack)
 {
 	int	size;
 	int	i;
@@ -44,7 +44,7 @@ void	ft_binary_radix(int shift, a_list **a_stack, a_list **b_stack)
 		push(b_stack, a_stack, 'a');
 }
 
-void	ft_sort(a_list **a_stack, a_list **b_stack)
+void	ft_sort(t_alist **a_stack, t_alist **b_stack)
 {
 	int	i;
 
@@ -54,12 +54,11 @@ void	ft_sort(a_list **a_stack, a_list **b_stack)
 		ft_binary_radix(i, a_stack, b_stack);
 		i++;
 	}
-	
 }
 
-void	ft_lstprint(a_list **lst)
+/*void	ft_lstprint(t_alist **lst)
 {
-	a_list	*tmp;
+	t_alist	*tmp;
 
 	if(*lst == NULL) {
 		ft_printf("Empty list");
@@ -71,12 +70,12 @@ void	ft_lstprint(a_list **lst)
 		tmp = tmp->next;
 	}
 	ft_printf("%d ",tmp->content);
-}
+}*/
 
 int	main(int argc, char **argv)
 {
-	a_list	*a_stack;
-	a_list	*b_stack;
+	t_alist	*a_stack;
+	t_alist	*b_stack;
 	int		i;
 
 	if (argc <= 3)
