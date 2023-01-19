@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 10:09:25 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/17 14:53:52 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/01/19 10:45:16 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@
 	to the first node of the section removed from the list.
 */ 
 
-t_list	*remove_index(t_list **lst, int index)
+a_list	*remove_index(a_list **lst, int index)
 {
-	t_list	*tmp;
-	t_list	*tmp2;
+	a_list	*tmp;
+	a_list	*tmp2;
 	int		i;
 
-	if (!lst || ft_lstsize(*lst) <= index)
+	if (!lst || ft_alstsize(*lst) <= index)
 		return (NULL);
 	tmp = *lst;
 	i = 0;
@@ -47,9 +47,9 @@ t_list	*remove_index(t_list **lst, int index)
 	return (NULL);
 }
 
-int	get_min_index(t_list *stack)
+int	get_min(a_list *stack)
 {
-	t_list	*tmp;
+	a_list	*tmp;
 	int 	min;
 	int		i;
 	int		index;
@@ -57,23 +57,23 @@ int	get_min_index(t_list *stack)
 	i = 0;
 	index = 0;
 	tmp = stack;
-	min = ft_atoi(tmp->content);
+	min = tmp->content;
 	while (tmp != NULL)
 	{
-		if (ft_atoi(tmp->content) < min)
+		if (tmp->content < min)
 		{
-			min = ft_atoi(tmp->content);
+			min = tmp->content;
 			index = i;
 		}
 		tmp = tmp->next;
 		i++;
 	}
-	return (index);
+	return (min);
 }
 
-int	get_max_index(t_list *stack)
+int	get_max(a_list *stack)
 {
-	t_list	*tmp;
+	a_list	*tmp;
 	int 	max;
 	int		i;
 	int		index;
@@ -81,32 +81,32 @@ int	get_max_index(t_list *stack)
 	i = 0;
 	index = 0;
 	tmp = stack;
-	max = ft_atoi(tmp->content);
+	max = tmp->content;
 	while (tmp != NULL)
 	{
-		if (ft_atoi(tmp->content) > max)
+		if (tmp->content > max)
 		{
-			max = ft_atoi(tmp->content);
+			max = tmp->content;
 			index = i;
 		}
 		tmp = tmp->next;
 		i++;
 	}
-	return (index);
+	return (max);
 }
 
-int	get_average(t_list *stack)
+int	get_average(a_list *stack, int size)
 {
-	t_list	*tmp;
+	a_list	*tmp;
 	int 	average;
 	int		count;
 	
 	count = 0;
 	average = 0;
 	tmp = stack;
-	while (tmp != NULL)
+	while (tmp != NULL && count < (ft_alstsize(stack) - size))
 	{
-		average += ft_atoi(tmp->content);
+		average += tmp->content;
 		count++;
 		tmp = tmp->next;
 	}
@@ -115,18 +115,18 @@ int	get_average(t_list *stack)
 	return (average);
 }
 
-int	ft_is_sorted(t_list *stack, char c)
+int	ft_is_sorted(a_list *stack, char c)
 {
-	t_list *tmp1;
-	t_list *tmp2;
+	a_list *tmp1;
+	a_list *tmp2;
 
 	tmp1 = stack;
 	tmp2 = stack->next;
 	while(tmp2 != NULL)
 	{
-		if (ft_atoi(tmp1->content) > ft_atoi(tmp2->content) && c == 'a')
+		if ((tmp1->content > tmp2->content) && c == 'a')
 			return (0);
-		if (ft_atoi(tmp1->content) < ft_atoi(tmp2->content) && c == 'b')
+		if ((tmp1->content < tmp2->content) && c == 'b')
 			return (0);
 		tmp1 = tmp1->next;
 		tmp2 = tmp2->next;

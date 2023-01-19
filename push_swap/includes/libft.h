@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:39:07 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/03 16:41:42 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/01/19 10:37:37 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 
 // Bonus Part
-
 typedef struct s_list
 {
 	void			*content;

@@ -7,6 +7,7 @@ DIRSRC = ./srcs/
 SRC =	push_swap \
 		push_swap_utils \
 		moves \
+		a_list \
 
 SRCS = $(addprefix ${DIRSRC}, $(addsuffix .c, ${SRC}))
 
