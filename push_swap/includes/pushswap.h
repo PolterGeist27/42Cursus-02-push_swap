@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 14:14:54 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/19 11:28:37 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/01/19 12:47:40 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ int		get_average(a_list *stack, int size);
 int		ft_is_sorted(a_list *stack, char c);
 int		get_min_index(a_list *stack);
 int		get_max_index(a_list *stack);
+void	ft_index(a_list **stack);
+void	ft_handle_5(a_list **a_stack, a_list **b_stack);
+void	ft_handle_3(a_list **stack, char c);
 
 // a_list functions
 a_list	*ft_alstnew(void *content);

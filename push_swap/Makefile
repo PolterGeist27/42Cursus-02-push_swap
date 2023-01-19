@@ -6,6 +6,7 @@ DIRSRC = ./srcs/
 
 SRC =	push_swap \
 		push_swap_utils \
+		push_swap_utils2 \
 		moves \
 		a_list \
 
