@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 14:20:12 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/19 13:25:29 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/01/20 11:40:42 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,22 @@ Possible ways to sort the stacks:
 	2:
 		-...
 */
+
+void	free_stack(t_alist *stack)
+{
+	t_alist *tmp;
+	t_alist *tmp_next;
+	
+	if (!stack)
+		return ;
+	tmp = stack;
+	while(tmp != NULL)
+	{
+		tmp_next = tmp->next;
+		free(tmp);
+		tmp = tmp_next;
+	}
+}
 
 void	ft_binary_radix(int shift, t_alist **a_stack, t_alist **b_stack)
 {
@@ -95,4 +111,6 @@ int	main(int argc, char **argv)
 		ft_handle_5(&a_stack, &b_stack);
 	else
 		ft_sort(&a_stack, &b_stack);
+	free_stack(a_stack);
+	free_stack(b_stack);
 }
