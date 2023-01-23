@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 14:14:54 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/19 13:20:34 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/01/20 11:47:08 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,10 @@ int		ft_alstsize(t_alist *lst);
 void	ft_alstadd_back(t_alist **lst, t_alist *new);
 void	ft_alstadd_front(t_alist **lst, t_alist *new);
 t_alist	*ft_alstlast(t_alist *lst);
+
+// Main
+void	free_stack(t_alist *stack);
+void	ft_binary_radix(int shift, t_alist **a_stack, t_alist **b_stack);
+void	ft_sort(t_alist **a_stack, t_alist **b_stack);
 
 #endif
