@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 11:27:15 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/19 13:22:46 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/01/24 13:31:45 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,10 @@ void	ft_handle_5(t_alist **a_stack, t_alist **b_stack)
 	ft_handle_3(a_stack, 'a');
 	push(b_stack, a_stack, 'a');
 	if (ft_is_sorted(*a_stack, 'a'))
+	{
 		push(b_stack, a_stack, 'a');
+		rotate(a_stack, 'a');
+	}
 	else
 	{
 		rotate(a_stack, 'a');

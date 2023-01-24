@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 14:20:12 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/24 12:14:20 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/01/24 15:40:44 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ft_binary_radix(int shift, t_alist **a_stack, t_alist **b_stack)
 	}
 	size = ft_alstsize(*b_stack);
 	i = 0;
-	while (i < size && (*b_stack) != NULL && !ft_is_sorted(*b_stack, 'b'))
+	while (i < size && (*b_stack) != NULL)
 	{
 		if (((*b_stack)->index & (1 << (shift + 1))) == 0)
 			rotate(b_stack, 'b');
@@ -94,8 +94,6 @@ void	ft_sort(t_alist **a_stack, t_alist **b_stack)
 		ft_binary_radix(i, a_stack, b_stack);
 		//ft_printf("\nI: %d\n", i);
 		i++;
-		if (i > 15)
-			return;
 		/*ft_printf("\n----------\nStack A: ");
 		ft_lstprint(a_stack);
 		ft_printf("\nStack B: ");
@@ -103,6 +101,9 @@ void	ft_sort(t_alist **a_stack, t_alist **b_stack)
 		ft_printf("\n----------\n");*/
 	}
 }
+
+// 100000000
+// 001111111
 
 void	ft_get_input(int argc, char **argv, t_alist **a_stack)
 {
