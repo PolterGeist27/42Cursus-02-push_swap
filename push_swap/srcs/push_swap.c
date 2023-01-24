@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 14:20:12 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/23 13:06:42 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/01/24 12:14:20 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 /*
 TODO:
-	- Check if the list still has numbers to push to b_stack or to a_stack
-	before continuing to parse through.
 	- Find if the next "pushable" number is faster to reach using "rra" or "ra"
 	and apply this when pushing the numbers from a_stack (with the current bit at '0')
 	and  when pushing the numbers from b_stack (with the next bit at '1')
@@ -31,10 +29,10 @@ void	ft_lstprint(t_alist **lst)
 	}
 	tmp = *lst;
 	while (tmp->next != NULL){
-		ft_printf("%d ",tmp->content);
+		ft_printf("%d ",tmp->index);
 		tmp = tmp->next;
 	}
-	ft_printf("%d ",tmp->content);
+	ft_printf("%d ",tmp->index);
 }
 
 void	free_stack(t_alist *stack)
@@ -60,17 +58,15 @@ void	ft_binary_radix(int shift, t_alist **a_stack, t_alist **b_stack)
 
 	size = ft_alstsize(*a_stack);
 	i = 0;
-	while (i < size)
+	while (i < size && (!ft_is_sorted(*a_stack, 'a') && *a_stack != NULL))
 	{
 		if (((*a_stack)->index & (1 << shift)) == 0)
-		{
 			push(a_stack, b_stack, 'b');
-		}
 		else
 			rotate(a_stack, 'a');
 		i++;
 	}
-	if (ft_alstsize(*b_stack) > ft_alstsize(*a_stack))
+	if (ft_is_sorted(*b_stack, 'b') && (ft_is_sorted(*a_stack, 'a') || *a_stack == NULL))
 	{
 		while (*b_stack != NULL)
 			push(b_stack, a_stack, 'a');
@@ -78,9 +74,9 @@ void	ft_binary_radix(int shift, t_alist **a_stack, t_alist **b_stack)
 	}
 	size = ft_alstsize(*b_stack);
 	i = 0;
-	while (i < size && (*b_stack) != NULL)
+	while (i < size && (*b_stack) != NULL && !ft_is_sorted(*b_stack, 'b'))
 	{
-		if (((*b_stack)->index & (1 << (shift + 1))) == 0 || ft_alstsize(*b_stack) == 1)
+		if (((*b_stack)->index & (1 << (shift + 1))) == 0)
 			rotate(b_stack, 'b');
 		else
 			push(b_stack, a_stack, 'a');
@@ -96,8 +92,11 @@ void	ft_sort(t_alist **a_stack, t_alist **b_stack)
 	while (!ft_is_sorted(*a_stack, 'a') || *b_stack != NULL)
 	{
 		ft_binary_radix(i, a_stack, b_stack);
+		//ft_printf("\nI: %d\n", i);
 		i++;
-/*		ft_printf("\n----------\nStack A: ");
+		if (i > 15)
+			return;
+		/*ft_printf("\n----------\nStack A: ");
 		ft_lstprint(a_stack);
 		ft_printf("\nStack B: ");
 		ft_lstprint(b_stack);

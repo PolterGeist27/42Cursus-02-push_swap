@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 10:09:25 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/19 13:24:09 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/01/24 11:03:56 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,9 @@ int	ft_is_sorted(t_alist *stack, char c)
 {
 	t_alist	*tmp1;
 	t_alist	*tmp2;
-
+	
+	if (stack == NULL)
+		return (0);
 	tmp1 = stack;
 	tmp2 = stack->next;
 	while (tmp2 != NULL)
