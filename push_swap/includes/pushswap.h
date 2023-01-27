@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 14:14:54 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/24 15:37:48 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/01/27 10:22:49 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ void	ft_index(t_alist **stack);
 void	ft_handle_5(t_alist **a_stack, t_alist **b_stack);
 void	ft_handle_3(t_alist **stack, char c);
 
-// Sort Utils
-int	find_least_moves(t_alist **stack, int bit);
-int	has_pushable_number(t_alist **stack, int shift, int bit);
+void	sort_b_stack(t_alist **b_stack, t_alist **a_stack, int shift);
 
 // t_alist functions
 t_alist	*ft_alstnew(void *content);

@@ -6,24 +6,32 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 13:36:43 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/24 15:37:16 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/01/27 10:22:31 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-int	has_pushable_number(t_alist **stack, int shift, int bit)
+void	sort_b_stack(t_alist **b_stack, t_alist **a_stack, int shift)
 {
-	t_alist *tmp;
+	int	i;
+	int	size;
 
-	tmp = *stack;
-	while (tmp != NULL)
+	if (ft_is_sorted(*b_stack, 'b')
+		&& (ft_is_sorted(*a_stack, 'a') || *a_stack == NULL))
 	{
-		if ((tmp->index & (1 << shift)) == bit)
-			return (1);
-		tmp = tmp->next;
+		while (*b_stack != NULL)
+			push(b_stack, a_stack, 'a');
+		return ;
 	}
-	return (0);
+	size = ft_alstsize(*b_stack);
+	i = 0;
+	while (i < size && (*b_stack) != NULL)
+	{
+		if (((*b_stack)->index & (1 << (shift + 1))) == 0)
+			rotate(b_stack, 'b');
+		else
+			push(b_stack, a_stack, 'a');
+		i++;
+	}
 }
-
-int	find_least_moves(t_alist **stack, int index);
