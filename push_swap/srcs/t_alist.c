@@ -6,11 +6,11 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 10:36:21 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/25 10:31:55 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/02/06 10:30:53 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pushswap.h"
+#include "../includes/pushswap.h"
 
 t_alist	*ft_alstnew(void *content)
 {

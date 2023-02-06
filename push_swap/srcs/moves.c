@@ -6,11 +6,11 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 11:57:31 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/19 13:26:57 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/02/06 10:30:40 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pushswap.h"
+#include "../includes/pushswap.h"
 
 /*
 Linked list functions in libft:

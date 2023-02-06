@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 14:14:54 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/27 10:22:49 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/02/06 10:52:46 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ void	ft_handle_5(t_alist **a_stack, t_alist **b_stack);
 void	ft_handle_3(t_alist **stack, char c);
 
 void	sort_b_stack(t_alist **b_stack, t_alist **a_stack, int shift);
+int		ft_check_digit(char *str);
+void	ft_check_repeats(t_alist *stack);
+long	ft_atol(char *str);
 
 // t_alist functions
 t_alist	*ft_alstnew(void *content);

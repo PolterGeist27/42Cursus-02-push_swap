@@ -6,11 +6,11 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 14:20:12 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/27 10:23:21 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/02/06 11:02:57 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pushswap.h"
+#include "../includes/pushswap.h"
 
 void	free_stack(t_alist *stack)
 {
@@ -67,7 +67,7 @@ void	ft_get_input(int argc, char **argv, t_alist **a_stack)
 	if (argc > 2)
 	{
 		i = 1;
-		while (argv[i] != NULL)
+		while (argv[i] != NULL && ft_check_digit(argv[i]))
 		{
 			ft_alstadd_back(a_stack, ft_alstnew(argv[i]));
 			i++;
@@ -77,7 +77,7 @@ void	ft_get_input(int argc, char **argv, t_alist **a_stack)
 	{
 		i = 0;
 		stack = ft_split(argv[1], ' ');
-		while (stack[i] != NULL)
+		while (stack[i] != NULL && ft_check_digit(stack[i]))
 		{
 			ft_alstadd_back(a_stack, ft_alstnew(stack[i]));
 			free(stack[i]);
@@ -93,13 +93,11 @@ int	main(int argc, char **argv)
 	t_alist	*b_stack;
 
 	if (argc < 2)
-	{
-		ft_printf("Error! Input an array to sort!\n");
 		return (0);
-	}
 	a_stack = NULL;
 	b_stack = NULL;
 	ft_get_input(argc, argv, &a_stack);
+	ft_check_repeats(a_stack);
 	ft_index(&a_stack);
 	if (ft_alstsize(a_stack) <= 3)
 		ft_handle_3(&a_stack, 'a');

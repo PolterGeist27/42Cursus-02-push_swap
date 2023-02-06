@@ -6,11 +6,11 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 11:27:15 by diogmart          #+#    #+#             */
-/*   Updated: 2023/01/27 10:17:17 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/02/06 11:21:16 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pushswap.h"
+#include "../includes/pushswap.h"
 
 int	get_min_index(t_alist *stack)
 {
@@ -65,25 +65,28 @@ void	ft_index(t_alist **stack)
 	t_alist	*tmp;
 	int		current_index;
 	int		min;
-	int		max;
+	int		next_min;
 
 	min = get_min(*stack);
-	max = get_max(*stack);
+	next_min = get_max(*stack);
 	current_index = 0;
 	tmp = *stack;
-	while (min <= max)
+	while (1)
 	{
 		while (tmp != NULL)
 		{
 			if (tmp->content == min)
-			{
-				tmp->index = current_index;
-				current_index++;
-			}
+				tmp->index = current_index++;
+			else if (tmp->content <= next_min && tmp->content > min)
+				next_min = tmp->content;
 			tmp = tmp->next;
+
 		}
+		if (min == get_max(*stack))
+			return ;
 		tmp = *stack;
-		min++;
+		min = next_min;
+		next_min = get_max(*stack);
 	}
 }
 
