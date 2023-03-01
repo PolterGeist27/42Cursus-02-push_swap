@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 11:27:15 by diogmart          #+#    #+#             */
-/*   Updated: 2023/02/06 11:21:16 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/03/01 12:58:44 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void	ft_index(t_alist **stack)
 			else if (tmp->content <= next_min && tmp->content > min)
 				next_min = tmp->content;
 			tmp = tmp->next;
-
 		}
 		if (min == get_max(*stack))
 			return ;
