@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 14:20:12 by diogmart          #+#    #+#             */
-/*   Updated: 2023/02/06 11:02:57 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/03/01 15:00:44 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ int	main(int argc, char **argv)
 	t_alist	*a_stack;
 	t_alist	*b_stack;
 
-	if (argc < 2)
-		return (0);
+	if (argc < 2 || argv[1][0] == '\0')
+		return (ft_printf("Error\n"), 0);
 	a_stack = NULL;
 	b_stack = NULL;
 	ft_get_input(argc, argv, &a_stack);
