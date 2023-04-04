@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 13:36:43 by diogmart          #+#    #+#             */
-/*   Updated: 2023/02/06 11:01:15 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:19:51 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ int	ft_check_digit(char *str)
 	return (1);
 }
 
-void	ft_check_repeats(t_alist *stack)
+int	ft_check_repeats(t_alist *stack)
 {
 	t_alist	*tmp;
 	t_alist	*tmp2;
 
 	if (stack == NULL)
-		return ;
+		return (0);
 	tmp = stack;
 	tmp2 = stack->next;
 	while (tmp->next != NULL)
@@ -74,15 +74,13 @@ void	ft_check_repeats(t_alist *stack)
 		while (tmp2 != NULL)
 		{
 			if (tmp->content == tmp2->content)
-			{
-				ft_printf("Error\n");
-				exit (0);
-			}
+				return (1);
 			tmp2 = tmp2->next;
 		}
 		tmp = tmp->next;
 		tmp2 = tmp->next;
 	}
+	return (0);
 }
 
 long	ft_atol(char *str)
@@ -112,4 +110,12 @@ long	ft_atol(char *str)
 	if (j % 2 == 1)
 		final *= -1;
 	return (final);
+}
+
+void	ft_error(t_alist **a_stack, t_alist **b_stack)
+{
+	free_stack(*a_stack);
+	free_stack(*b_stack);
+	ft_printf("Error\n");
+	exit(0);
 }

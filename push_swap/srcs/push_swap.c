@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 14:20:12 by diogmart          #+#    #+#             */
-/*   Updated: 2023/03/01 15:00:44 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:18:40 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,16 +92,19 @@ int	main(int argc, char **argv)
 	t_alist	*a_stack;
 	t_alist	*b_stack;
 
+	if (argc == 1)
+		return (0);
 	if (argc < 2 || argv[1][0] == '\0')
 		return (ft_printf("Error\n"), 0);
 	a_stack = NULL;
 	b_stack = NULL;
 	ft_get_input(argc, argv, &a_stack);
-	ft_check_repeats(a_stack);
+	if (ft_check_repeats(a_stack))
+		ft_error(&a_stack, &b_stack);
 	ft_index(&a_stack);
-	if (ft_alstsize(a_stack) <= 3)
+	if (!ft_is_sorted(a_stack, 'a') && ft_alstsize(a_stack) <= 3)
 		ft_handle_3(&a_stack, 'a');
-	else if (ft_alstsize(a_stack) <= 5)
+	else if (!ft_is_sorted(a_stack, 'a') && ft_alstsize(a_stack) <= 5)
 		ft_handle_5(&a_stack, &b_stack);
 	else
 		ft_sort(&a_stack, &b_stack);

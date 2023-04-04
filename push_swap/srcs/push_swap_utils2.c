@@ -6,7 +6,7 @@
 /*   By: diogmart <diogmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 11:27:15 by diogmart          #+#    #+#             */
-/*   Updated: 2023/03/01 12:58:44 by diogmart         ###   ########.fr       */
+/*   Updated: 2023/04/04 15:23:44 by diogmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,15 @@ void	ft_index(t_alist **stack)
 
 void	ft_handle_5(t_alist **a_stack, t_alist **b_stack)
 {
+	int	max;
+	int	min;
+
+	max = get_max(*a_stack);
+	min = get_min(*a_stack);
 	while (ft_alstsize(*a_stack) != 3)
 	{
-		if ((*a_stack)->content == get_min(*a_stack)
-			|| (*a_stack)->content == get_max(*a_stack))
-		{
+		if ((*a_stack)->content == max || (*a_stack)->content == min)
 			push(a_stack, b_stack, 'b');
-		}
 		else
 			rotate(a_stack, 'a');
 	}
