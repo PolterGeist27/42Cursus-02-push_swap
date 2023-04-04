@@ -13,8 +13,10 @@ SRC =	push_swap \
 
 SRCS = $(addprefix ${DIRSRC}, $(addsuffix .c, ${SRC}))
 
-NAME = push_swap.a
+OBJS = $(SRCS:%.c=%.o)
+
 NAMELIBFT = libft.a
+NAME = push_swap
 CFLAGS = -Wall -Wextra -Werror -I $(DIRINC)
 CC = cc
 LIBC = ar rc
@@ -25,14 +27,12 @@ all: $(NAME)
 $(NAMELIBFT):
 	make all -C $(DIRLIB)
 
-$(NAME): $(NAMELIBFT)
+$(NAME): $(OBJS) $(NAMELIBFT)
 	$(CC) $(CFLAGS) $(SRCS) libft/libft.a -o push_swap
-
-bonus: $(NAMELIBFT)
-#	...
 
 clean:
 	make clean -C $(DIRLIB)
+	rm -f $(OBJS)
 
 fclean: clean
 	make fclean -C $(DIRLIB)
